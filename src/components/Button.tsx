@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import styled from 'styled-components';
 
 interface ButtonProps {
@@ -11,7 +11,7 @@ interface ButtonProps {
     onClick?: () => void;
 }
 
-export const StyledButton = styled.button<ButtonProps> `
+const StyledButton = styled.button<ButtonProps> `
     width: ${props => props.width ? props.width : '100%'};
     background-color: ${props => props.background ? props.background: '#67A8E3'};
     border-radius: ${props => props.radius ? props.radius: '0'};
@@ -34,5 +34,27 @@ export const StyledButton = styled.button<ButtonProps> `
     }
 `;
 
-export type { ButtonProps };
+const Button: React.FC<ButtonProps> = ({
+    width = '100%',
+    height = '100%',
+    background = '#67A8E3',
+    color = '#FFFFFF',
+    radius = '0',
+    onClick = () => {},
+    children
+}) => {
+    return (
+        <StyledButton 
+            width={width}
+            height={height}
+            background={background} 
+            color={color} 
+            radius={radius}
+            onClick={onClick}
+        >
+            {children}
+        </StyledButton>
+    );
+};
 
+export default Button;

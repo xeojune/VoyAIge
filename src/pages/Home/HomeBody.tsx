@@ -1,23 +1,17 @@
 import React, { useState } from "react";
 import { AppContainer, MainContent, Title, Subtitle, ScreenshotContainer, LeftContent, RightContent } from "../../styles/HomeBodyStyle";
 import HomeImage from "../../assets/Home.jpg"
-import Button from "../General/Button";
-import SearchBar from "../General/SearchBar";
-import { useNavigate } from "react-router-dom";
+import Button from "../../components/Button";
+import SearchBar from "../../components/SearchBar";
+import { Link } from "react-router-dom";
 
 const HomeBody: React.FC = () => {
-  const navigate = useNavigate();
   const [showSearchBar, setShowSearchBar] = useState(false);
 
   //showing search bar button function
   const handleSearchClick = () => {
     setShowSearchBar(true);
   };
-
-  //create plan button function
-  const handlePlanClick = () => {
-    navigate('/TripPlanner')
-  }
 
   return (
     <AppContainer>
@@ -29,7 +23,9 @@ const HomeBody: React.FC = () => {
           {showSearchBar ? (
             <>
               <SearchBar placeholder="Where do you want to go?" />
-              <Button width="250px" height="40px" background="black" radius='5px' onClick={handlePlanClick}> Create Plan </Button>
+              <Link to='/TripPlanner'>
+                <Button width="250px" height="40px" background="black" radius='5px'> Create Plan </Button>
+              </Link>
             </>
           ) : (
             <Button width="250px" height="80px" background="black" onClick={handleSearchClick}> Start VoyAIge </Button>

@@ -1,6 +1,6 @@
 import React from 'react';
-import Home from './pages/Home';
-import TripPlanner from './pages/TripPlanner';
+import Home from './pages/Home/Home';
+import TripPlanner from './pages/Main/TripPlanner';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 const App: React.FC = () => {

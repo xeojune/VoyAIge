@@ -1,7 +1,7 @@
 import React from "react";
-import Map from "../components/Main/Map";
-import NavBar from "../components/Main/NavBar";
-import List from "../components/Main/List";
+import Map from "./Map";
+import NavBar from "./NavBar";
+import List from "./List";
 
 const TripPlanner: React.FC = () => {
     return(
