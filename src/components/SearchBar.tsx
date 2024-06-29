@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { IoSearch } from "react-icons/io5";
 
+
 interface SearchBarProps {
   placeholder: string;
+  onInputChange: (value: string) => void;
 }
 
 const SearchBarContainer = styled.div`
@@ -38,12 +40,20 @@ color: #333;
 
 
 const SearchBar: React.FC<SearchBarProps> = ({ 
-    placeholder
+    placeholder,
+    onInputChange
 }) => {
+    const [inputValue, setInputValue] = useState('');
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
+      setInputValue(value);
+      onInputChange(value); // Call the callback with the new input value
+    };
     return (
         <SearchBarContainer>
           <SearchIcon />
-          <SearchInput placeholder={placeholder} />
+          <SearchInput placeholder={placeholder} value={inputValue} onChange={handleInputChange}/>
         </SearchBarContainer>
     );
   };
