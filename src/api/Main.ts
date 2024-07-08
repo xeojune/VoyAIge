@@ -17,6 +17,7 @@ export const getPlacesData = async (query:string): Promise<any> => {
       //Use the location ID from above to return restaurant data and attraction data
       const restaurantData = await getRestaurantData(locationId);
       const attractionData = await getAttractionData(locationId);
+      console.log(attractionData)
 
       //return the data within that data (contains name of the restaurants)
       return {

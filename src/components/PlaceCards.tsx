@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { restaurantData } from "../types/RestaurantTypes";
 import restaurantImg from '../assets/restaurant.png'
+import { FcIdea, FcRating } from "react-icons/fc";
+
 
 interface CardProps {
     place: restaurantData;
@@ -131,7 +133,23 @@ const PlaceDetails = styled.div`
         font-size: 0.75rem;
         white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis;s
+        text-overflow: ellipsis;
+    }
+    
+    .place-reviews {
+        width: 100%;
+        font-size: 0.75rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .place-ratings {
+        width: 100%;
+        font-size: 0.75rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 `
 
@@ -163,6 +181,8 @@ const Card: React.FC<CardProps> = ({
                         <PlaceDetails>
                             <span className="place-name">{place.name}</span>
                             <span className="place-address">{place.address}</span>
+                            <span className="place-reviews"><FcIdea />reviews: {place.num_reviews}</span>
+                            <span className="place-ratings"><FcRating/>ratings: {place.rating}</span>
                         </PlaceDetails>
                         
                     </CardContent>

@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import { restaurantData } from "../../types/RestaurantTypes";
 import { locationData } from "../../types/LocationTypes";
 import { LeftPanel, PageContainer } from "../../styles/TripPlannerStyle";
+import { attractionData } from "../../types/AttractionTypes";
 
 //capitalize first letter of any given country name typed by user
 const capitalizeFirstLetter = (string: string) => {
@@ -18,7 +19,8 @@ const TripPlanner: React.FC = () => {
     const query = new URLSearchParams(location.search);
     let country = query.get('country');
 
-    const [places, setPlaces] = useState<restaurantData[]>([]);
+    const [restaurants, setRestaurants] = useState<restaurantData[]>([]);
+    const [attractions, setAttractions] = useState<attractionData[]>([]);
     const [coordinates, setCoordinates] = useState<locationData[]>([]);
 
     if (country) {
@@ -32,11 +34,13 @@ const TripPlanner: React.FC = () => {
             getPlacesData(country)
                 .then((data) => {
                     //data should store dictionary list of restaurants (30 restaurants)
+                    console.log(data)
                     setCoordinates([{
                         latitude: data.latitude,
                         longitude: data.longitude
                     }])
-                    setPlaces(data.restaurants);
+                    setRestaurants(data.restaurants);
+                    setAttractions(data.attractions);
                 });
         }
     }, []);
@@ -45,7 +49,7 @@ const TripPlanner: React.FC = () => {
         <PageContainer>
             <LeftPanel>
                 <NavBar />
-                <List places={places} country={country}/>
+                <List places={restaurants} attractions={attractions} country={country}/>
             </LeftPanel>
             <Map coordinates={coordinates} />
         </PageContainer>
