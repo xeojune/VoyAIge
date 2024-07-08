@@ -7,16 +7,16 @@ const NavBar: React.FC = () =>{
        <NavbarBrand>VoyAIge</NavbarBrand>
        <NavbarMenu>
          <NavbarItem>
-            <h2>Step 1:</h2>
-            <h2>Confirm Date</h2>
+            <h5>Step 1:</h5>
+            <h5>Confirm Date</h5>
          </NavbarItem>
          <NavbarItem>
-            <h2>Step 2:</h2>
-            <h2>Choose Location</h2>
+            <h5>Step 2:</h5>
+            <h5>Choose Location</h5>
          </NavbarItem>
          <NavbarItem>
-            <h2>Step 3:</h2>
-            <h2>Book Hotels</h2>
+            <h5>Step 3:</h5>
+            <h5>Book Hotels</h5>
          </NavbarItem>
        </NavbarMenu>
     </Navbar>

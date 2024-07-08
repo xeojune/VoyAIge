@@ -17,10 +17,10 @@ const StyledButton = styled.button<ButtonProps> `
     border-radius: ${props => props.radius ? props.radius: '0'};
     height: ${props => props.height ? props.height : '100%'};
     color: ${props => props.color ? props.color : '#ffffff'};
+    border: 1px solid gray;
     outline: none;
+    padding: 5px;
     font-size: 1rem;
-    margin-top: 20px;
-    margin-bottom: 20px;
     transition: background-color 0.3s ease;
     &:hover {
         cursor: pointer;

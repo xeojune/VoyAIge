@@ -5,13 +5,14 @@ import { IoSearch } from "react-icons/io5";
 
 interface SearchBarProps {
   placeholder: string;
+  width?: string;
   onInputChange: (value: string) => void;
 }
 
-const SearchBarContainer = styled.div`
+const SearchBarContainer = styled.div<{width: string}>`
 display: flex;
 align-items: center;
-width: 100%;
+width: ${props => props.width ? props.width : '100%'};
 max-width: 500px;
 background-color: #f5f5f5;
 border: 1px solid #ddd;
@@ -41,6 +42,7 @@ color: #333;
 
 const SearchBar: React.FC<SearchBarProps> = ({ 
     placeholder,
+    width = '100%',
     onInputChange
 }) => {
     const [inputValue, setInputValue] = useState('');
@@ -51,7 +53,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       onInputChange(value); // Call the callback with the new input value
     };
     return (
-        <SearchBarContainer>
+        <SearchBarContainer width ={width} >
           <SearchIcon />
           <SearchInput placeholder={placeholder} value={inputValue} onChange={handleInputChange}/>
         </SearchBarContainer>

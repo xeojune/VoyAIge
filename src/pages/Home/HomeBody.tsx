@@ -3,12 +3,11 @@ import { AppContainer, MainContent, Title, Subtitle, ScreenshotContainer, LeftCo
 import HomeImage from "../../assets/Home.jpg"
 import Button from "../../components/Button";
 import SearchBar from "../../components/SearchBar";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const HomeBody: React.FC = () => {
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [query, setQuery] = useState("");
-  const navigate = useNavigate();
 
   //showing search bar button function
   const handleSearchClick = () => {
@@ -17,10 +16,6 @@ const HomeBody: React.FC = () => {
 
   const handleSearchInputChange = (value:string) => {
     setQuery(value);
-  };
-
-  const handleCreatePlanClick = () => {
-    navigate('/TripPlanner', { state: { query } }); // Navigate to /TripPlanner with state
   };
 
   return (
@@ -36,10 +31,9 @@ const HomeBody: React.FC = () => {
                 placeholder="Where do you want to go?"
                 onInputChange={handleSearchInputChange} 
               />
-              <Link to={{
-                pathname: '/TripPlanner'
-              }}>
-                <Button width="250px" height="40px" background="black" radius='5px' onClick={handleCreatePlanClick}> Create Plan </Button>
+              {/*Using Query Method to Pass to TripPlanner Page*/}
+              <Link to={`/TripPlanner?country=${query}`}>
+                <Button width="250px" height="40px" background="black" radius='5px'> Create Plan </Button>
               </Link>
             </>
           ) : (
@@ -52,6 +46,7 @@ const HomeBody: React.FC = () => {
             <img src={HomeImage} alt="" />
           </ScreenshotContainer>
         </RightContent>
+        
       </MainContent>
     </AppContainer>
   );
