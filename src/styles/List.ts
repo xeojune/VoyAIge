@@ -70,7 +70,24 @@ export const PlacesContainer = styled.div`
 export const CardContainer = styled.ul`
   display: flex;
   flex-direction: column;
-  width: 100%;
   overflow-x: hidden;
   padding: 0 4px 2px;
+`
+
+export const CardButton = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: auto;
+    height: 40px;
+    @media (min-width: 768px) {
+        height: 48px;
+    }
+    @media (min-width: 1024px) {
+        height: 56px;
+    }
+    @media (min-width: 1536px) {
+        height: 64px;
+    }
 `

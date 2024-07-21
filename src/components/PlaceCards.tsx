@@ -1,18 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-import { restaurantData } from "../types/RestaurantTypes";
+// import { restaurantData } from "../types/RestaurantTypes";
 import restaurantImg from '../assets/restaurant.png'
-import { FcIdea, FcRating } from "react-icons/fc";
+import { FcIdea, FcRating} from "react-icons/fc";
+import { PlaceData } from "../types/PlaceTypes";
 
 
 interface CardProps {
-    place: restaurantData;
+    place: PlaceData;
     width?: string;
     height?: string;
     background?: string;
     color?: string;
     radius?: string;
     onClick?: () => void;
+    children: React.ReactNode;
 }
 
 const CardBox = styled.div`
@@ -54,6 +56,8 @@ const CardContent = styled.div`
     align-items: center;
     width: calc(100% - 50px);    
 `
+
+
 const PlaceLogo = styled.div`
     width: 50px;
     height: 50px;
@@ -153,6 +157,8 @@ const PlaceDetails = styled.div`
     }
 `
 
+
+
 const Card: React.FC<CardProps> = ({
     place,
     width = '100%',
@@ -161,6 +167,7 @@ const Card: React.FC<CardProps> = ({
     color = '#FFFFFF',
     radius = '0',
     onClick = () => {},
+    children,
 }) => {
     return(
         <CardBox>
@@ -186,11 +193,12 @@ const Card: React.FC<CardProps> = ({
                         </PlaceDetails>
                         
                     </CardContent>
+                    { children }
                 </CardMedia>
             </StyledCard>
         </CardBox>
         
         
-    )
-}
+    );
+};
 export default Card;
