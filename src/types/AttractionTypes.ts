@@ -1,9 +1,8 @@
-type restaurantResponse = {
-    data: restaurantData[];
+type attractionsResponse = {
+    data: attractionData[];
 }
 
-//add more props from the rapidapi
-type restaurantData = {
+type attractionData = {
     name: string;
     address: string;
     photo: {
@@ -13,14 +12,10 @@ type restaurantData = {
             };
         };
     };
-<<<<<<< Updated upstream
-=======
     latitude: string;
     longitude: string;
     num_reviews: string;
     rating: string;
->>>>>>> Stashed changes
 }
 
-
-export type { restaurantResponse, restaurantData }
+export type {attractionsResponse, attractionData}
