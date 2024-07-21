@@ -12,6 +12,8 @@ type attractionData = {
             };
         };
     };
+    latitude: string;
+    longitude: string;
     num_reviews: string;
     rating: string;
 }

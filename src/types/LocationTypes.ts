@@ -1,10 +1,8 @@
-type locationResponse = {
-    data: locationData[];
+export type LocationResponse = {
+    data: LocationData[];
 }
 
-type locationData = {
+export type LocationData = {
     latitude: string;
     longitude: string;
 }
-
-export type { locationResponse, locationData }
