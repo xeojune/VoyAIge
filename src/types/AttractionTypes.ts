@@ -10,6 +10,12 @@ type attractionData = {
             small: {
                 url: string;
             };
+            original: {
+                url: string;
+            }
+            medium: {
+                url: string;
+            }
         };
     };
     latitude: string;

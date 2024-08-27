@@ -10,10 +10,17 @@ export type PlaceData = {
             small: {
                 url: string;
             };
+            original: {
+                url: string;
+            }
+            medium: {
+                url: string;
+            }
         };
     };
     latitude: string;
     longitude: string;
     num_reviews: string;
     rating: string;
+    description: string;
 }

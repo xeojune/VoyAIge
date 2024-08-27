@@ -11,15 +11,18 @@ type restaurantData = {
             small: {
                 url: string;
             };
+            original: {
+                url: string;
+            }
+            medium: {
+                url: string;
+            }
         };
     };
-<<<<<<< Updated upstream
-=======
     latitude: string;
     longitude: string;
     num_reviews: string;
     rating: string;
->>>>>>> Stashed changes
 }
 
 

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
+import { FcPlus, FcOk } from "react-icons/fc";
 
 interface ButtonProps {
     width?: string;
@@ -7,7 +8,7 @@ interface ButtonProps {
     background?: string;
     color?: string;
     radius?: string;
-    children: React.ReactNode;
+    children?: React.ReactNode;
     onClick?: () => void;
 }
 
@@ -57,4 +58,34 @@ const Button: React.FC<ButtonProps> = ({
     );
 };
 
-export default Button;
+const ToggledButton: React.FC<ButtonProps> = ({
+    width = '100%',
+    height = '100%',
+    background = '#67A8E3',
+    color = '#FFFFFF',
+    radius = '0',
+    onClick = () => {},
+}) => {
+    const [isToggled, setIsToggled] = useState(false);
+
+    const handleToggle = () => {
+        setIsToggled(!isToggled);
+        if (onClick) {
+          onClick();
+        }
+      };
+    return (
+        <StyledButton 
+            width={width}
+            height={height}
+            background={background} 
+            color={color} 
+            radius={radius}
+            onClick={handleToggle}
+        >
+            {isToggled ? <FcOk /> : <FcPlus />}
+        </StyledButton>
+    );
+};
+
+export { Button, ToggledButton };

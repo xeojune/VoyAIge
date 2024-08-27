@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AppContainer, MainContent, Title, Subtitle, ScreenshotContainer, LeftContent, RightContent } from "../../styles/HomeBodyStyle";
 import HomeImage from "../../assets/Home.jpg"
-import Button from "../../components/Button";
+import {Button} from "../../components/Button";
 import SearchBar from "../../components/SearchBar";
 import { Link } from "react-router-dom";
 
