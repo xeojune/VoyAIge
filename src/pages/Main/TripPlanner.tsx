@@ -7,6 +7,7 @@ import { LocationData } from "../../types/LocationTypes";
 import { PlaceData } from "../../types/PlaceTypes";
 import { useLocation } from "react-router-dom";
 import { LeftPanel, PageContainer } from "../../styles/TripPlannerStyle";
+import { RecoilRoot } from "recoil";
 
 
 
@@ -28,9 +29,9 @@ const TripPlanner: React.FC = () => {
         country = capitalizeFirstLetter(country);
     }
 
+    const [places, setPlaces] = useState([]);
     //happen only at the start of app
     useEffect(() => {
-        console.log(country)
         if (country) {
             getPlacesData(country)
                 .then((data) => {
@@ -47,13 +48,16 @@ const TripPlanner: React.FC = () => {
     }, []);
     
     return(
-        <PageContainer>
-            <LeftPanel>
-                <NavBar />
-                <List restaurants={restaurants} attractions={attractions} country={country}/>
-            </LeftPanel>
-            <Map coordinates={coordinates} restaurants={restaurants} attractions={attractions} />
-        </PageContainer>
+        <RecoilRoot>
+            <PageContainer>
+                <LeftPanel>
+                    <NavBar />
+                    <List restaurants={restaurants} attractions={attractions} country={country}/>
+                </LeftPanel>
+                <Map coordinates={coordinates} />
+            </PageContainer>
+        </RecoilRoot>
+        
     );
 };
 export default TripPlanner;
