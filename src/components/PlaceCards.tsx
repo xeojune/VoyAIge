@@ -177,10 +177,9 @@ const Card: React.FC<CardProps> = ({
                 background={background} 
                 color={color} 
                 radius={radius}
-                onClick={onClick}
             >
                 <CardMedia>
-                    <CardContent>
+                    <CardContent onClick={onClick}>
                     
                         <PlaceLogo>
                             <img src={place.photo ? place.photo.images.small.url : restaurantImg} alt="Thumbnail" />

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { CardButton, ButtonsContainer, CardContainer, ListBody, ListContainer, ListHeader, PlacesContainer, SearchBarContainer } from "../../styles/List";
 import SearchBar from "../../components/SearchBar";
-import Button from "../../components/Button";
+import {Button, ToggledButton} from "../../components/Button";
 import Card from "../../components/PlaceCards";
 import { PlaceData } from "../../types/PlaceTypes";
-import { FcPlus, FcOk } from "react-icons/fc";
+import { useRecoilState } from "recoil";
+import { placeListState } from "../../states/atoms/placeListState";
+import ModalCard from "../../components/ModalCards";
 
 interface ListProps {
     restaurants: PlaceData[];
@@ -17,8 +19,12 @@ const List: React.FC<ListProps> = ({ restaurants, attractions, country }) =>{
     const [search, setSearch] = useState("");
     //state for button filter using buttons
     const [filter, setFilter] = useState<"recommend" | "eatery" | "views">("recommend");
-    //state for toggling icon on add places
-    const [icon, setIcon] = useState(<FcPlus />);
+    //state for open/close card
+    const [openCard, setOpenCard] = useState(false)
+    //state for storing place data for modal card
+    const [selectedPlace, setSelectedPlace] = useState<PlaceData | null>(null);
+    //recoil state for places
+    const [_, setPlaces] = useRecoilState(placeListState);
     
     
     //handling search filter
@@ -26,9 +32,31 @@ const List: React.FC<ListProps> = ({ restaurants, attractions, country }) =>{
         setSearch(value);
     }
 
-    const handleAddPlaces = () => {
-        setIcon(prevIcon => prevIcon.type === FcPlus ? <FcOk /> : <FcPlus />);
-    }
+    //function to add and remove places selected
+    const handleAddPlaces = (place: PlaceData) => {
+        setPlaces((prevPlaces) => {
+            const placeIndex = prevPlaces.findIndex(p => p.latitude === place.latitude && p.longitude === place.longitude);
+            if (placeIndex !== -1) {
+                //Remove Place
+                return prevPlaces.filter(( _, index) => index !== placeIndex);
+            } else {
+                //Add Place
+                return [...prevPlaces, place];
+            }
+        });
+    };
+
+    //open selected card
+    const handleOpenCard = (place: PlaceData) => {
+        setSelectedPlace(place)
+        setOpenCard(true);
+    };
+
+    //close selected card
+    const handleCloseCard = () => {
+        setOpenCard(false);
+        setSelectedPlace(null);
+    };
 
     //handling button filter
     const getFilteredPlaces = () => {
@@ -64,15 +92,19 @@ const List: React.FC<ListProps> = ({ restaurants, attractions, country }) =>{
                 <PlacesContainer>
                     <CardContainer>
                         {filteredPlaces?.filter(place => place.name).map((place, i) => (
-                            <Card key={i} place={place} width="100%" color="black" background="white">
+                            <Card key={i} place={place} width="100%" color="black" background="white" onClick={() => handleOpenCard(place)}>
                                 <CardButton>
-                                    <Button background='#85e1fc' radius="5px" onClick={handleAddPlaces}>{icon}</Button>
+                                    <ToggledButton background='#85e1fc' radius="5px" onClick={() => handleAddPlaces(place)} />
                                 </CardButton>
                             </Card>
                         ))}
+
+                        {openCard && selectedPlace && (
+                            <ModalCard place={selectedPlace} width="600px" height="650px" background="white" color="black" radius="10px" onClose={handleCloseCard}/>
+                        )}
+
                     </CardContainer>
                 </PlacesContainer>
-
             </ListBody>
         </ListContainer>
     );
