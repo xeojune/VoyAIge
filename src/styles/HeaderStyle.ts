@@ -7,13 +7,12 @@ export const NavbarContainer = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: white;
 `;
 
-export const Logo = styled.div`
-  font-size: 1.5rem;
-  font-weight: bold;
+export const Logo = styled.img`
+  width: 100px;
+  height: 50px;
 `;
 
 export const NavItems = styled.ul`
