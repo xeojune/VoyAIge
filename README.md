@@ -1,30 +1,50 @@
-# VoyAIge - Fast Last Minute Trip Planner with AI
+# VoyAIge - AI-Based Trip Planner
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+VoyAIge is an AI-powered trip planning application designed to help users easily plan their trips by suggesting itineraries, attractions, and restaurants. The app utilizes advanced AI models to provide personalized recommendations for an enhanced travel experience.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- AI-driven trip itinerary generation
+- Personalized travel recommendations
+- User-friendly interface
+- Real-time updates on attractions, restaurants, and more
+- Interactive map integration for trip visualization
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Frontend:**
+  - [ReactJS](https://reactjs.org/) - A JavaScript library for building user interfaces
+  - [TypeScript](https://www.typescriptlang.org/) - Typed JavaScript for scalable applications
+  - [Recoil](https://recoiljs.org/) - State management library for React
+  - [Axios](https://axios-http.com/) - For handling API requests
+  - [Styled Components](https://styled-components.com/) - For styling React components
+  - [React Router](https://reactrouter.com/) - For navigation and routing
+  - [Mapbox](https://www.mapbox.com/) - For interactive maps
 
-- Configure the top-level `parserOptions` property like this:
+- **Backend:**
+  - [Node.js](https://nodejs.org/) - JavaScript runtime for building the server-side
+  - [NestJS](https://nestjs.com/) - A framework for building efficient, scalable Node.js applications
+  - [OpenAI API](https://openai.com/api/) - For AI-based itinerary generation
+  - [MongoDB](https://www.mongodb.com/) - NoSQL database for storing user data
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- **Cloud Services:**
+  - [AWS S3](https://aws.amazon.com/s3/) - For file storage
+  - [AWS Lambda](https://aws.amazon.com/lambda/) - For serverless functions
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Getting Started
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+- Node.js
+- npm or yarn
+- MongoDB
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/voyaige.git
+   cd voyaige
