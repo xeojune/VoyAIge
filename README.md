@@ -1,5 +1,7 @@
 # VoyAIge - AI-Based Trip Planner
 
+![Logo](./src/assets/Logo.png?raw=true "VoyAIge Logo")
+
 VoyAIge is an AI-powered trip planning application designed to help users easily plan their trips by suggesting itineraries, attractions, and restaurants. The app utilizes advanced AI models to provide personalized recommendations for an enhanced travel experience.
 
 ## Features
