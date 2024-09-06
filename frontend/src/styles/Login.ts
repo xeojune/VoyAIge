@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+interface LoginBoxProps {
+  width?: string;
+  height?: string;
+}
+
 export const LoginPage = styled.div`
     position: absolute;
     top: 0;
@@ -18,9 +23,9 @@ export const AppContainer = styled.main`
   align-items: center;
 `
 // Login Box
-export const LoginBox = styled.div`
-  width: 100%;
-  height: 500px;
+export const StyledLoginBox = styled.div<LoginBoxProps>`
+  width: ${props => props.width ? props.width : '100%'};
+  height: ${props => props.height ? props.height : '500px'};
   padding: 20px;
   display: flex;
   max-width: 400px;
@@ -71,11 +76,11 @@ export const InputTitle = styled.div`
 `
 //Container for Input (id, pw)
 export const InputWrap = styled.div`
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   border-radius: 8px;
   padding: 16px;
-  margin-top: 8px;
   background-color: white;
   border: 1px solid #e2e0e0;
   transition: border-color 0.3s ease;

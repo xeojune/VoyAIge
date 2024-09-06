@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Header from "../Home/Header"
-import { AppContainer, ButtonWrap, ContentWrap, CreateAccountLink, CreateAccountWrapper, ErrorMessageWrap, InputTitle, InputWrap, LoginBox, LoginInput, LoginPage, LogoWrap, SubHeader, SubHeaderWrap, TitleWrap } from "../../styles/Login"
+import { AppContainer, ButtonWrap, ContentWrap, CreateAccountLink, CreateAccountWrapper, ErrorMessageWrap, InputTitle, InputWrap, LoginInput, LoginPage, LogoWrap, StyledLoginBox, SubHeader, SubHeaderWrap, TitleWrap } from "../../styles/Login"
 import { Button } from "../../components/Button";
 import LogoImage from "../../assets/Logo.png"
 
@@ -61,7 +61,7 @@ const Login: React.FC = () => {
         <LoginPage>
             <Header />
             <AppContainer>
-                <LoginBox>
+                <StyledLoginBox>
                     <TitleWrap>
                         <LogoWrap>
                             <img src={LogoImage} width='120px' height='60px'/>
@@ -72,7 +72,7 @@ const Login: React.FC = () => {
                     </TitleWrap>
 
                     <ContentWrap>
-                        <InputTitle>Username</InputTitle>
+                        <InputTitle>Username / Email</InputTitle>
                         <InputWrap>
                             <LoginInput type='text' value={username} onChange={handleLogin} />
                         </InputWrap>
@@ -112,7 +112,7 @@ const Login: React.FC = () => {
                         <CreateAccountLink to="/register">Create an Account</CreateAccountLink>
                     </CreateAccountWrapper>
             
-                </LoginBox>
+                </StyledLoginBox>
             </AppContainer>
         </LoginPage>
     )
