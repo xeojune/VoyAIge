@@ -4,11 +4,13 @@ import { AppContainer, ButtonWrap, ContentWrap, CreateAccountLink, CreateAccount
 import { Button } from "../../components/Button";
 import LogoImage from "../../assets/Logo.png"
 
+//test
+import userData from "../../api/LoginTest/auth.json";
 
-//dummy data
-const User = {
-    username: 'test@example.com',
-    pw: 'test2323@@@'
+interface User {
+    nickname: string;
+    email: string;
+    password: string;
 }
 
 const Login: React.FC = () => {
@@ -42,7 +44,8 @@ const Login: React.FC = () => {
     }
 
     const onClickConfirmButton = () => {
-        if(username === User.username && password === User.pw){
+        const user = userData.users.find((user: User) => user.email === username && user.password === password);
+        if(user){
             alert('Successfully Login.');
         } else {
             alert('Not Registered User');
