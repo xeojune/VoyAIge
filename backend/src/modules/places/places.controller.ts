@@ -9,10 +9,10 @@ export class PlacesController {
 
   @Get()
   async getPlaces(@Query('query') query: string): Promise<any> {
-    throw new HttpException('Custom error message', HttpStatus.BAD_REQUEST);
-    this.logger.log("Hello Log");
-    this.logger.error("Hello Error");
-    this.logger.debug("Hello Debug");
+    // throw new HttpException('Custom error message', HttpStatus.BAD_REQUEST);
+    // this.logger.log("Hello Log");
+    // this.logger.error("Hello Error");
+    // this.logger.debug("Hello Debug");
     return this.placesService.getPlacesData(query);
   }
 }
