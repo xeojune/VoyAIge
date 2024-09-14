@@ -10,6 +10,7 @@ interface ButtonProps {
     radius?: string;
     children?: React.ReactNode;
     onClick?: () => void;
+    disabled?: boolean;
 }
 
 const StyledButton = styled.button<ButtonProps> `
@@ -33,6 +34,11 @@ const StyledButton = styled.button<ButtonProps> `
     &:active {
         outline: none;
     }
+    &:disabled {
+        background-color: #dadada;
+        color: white;
+        cursor: not-allowed;
+    }
 `;
 
 const Button: React.FC<ButtonProps> = ({
@@ -42,7 +48,8 @@ const Button: React.FC<ButtonProps> = ({
     color = '#FFFFFF',
     radius = '0',
     onClick = () => {},
-    children
+    children,
+    disabled = false
 }) => {
     return (
         <StyledButton 
@@ -52,6 +59,7 @@ const Button: React.FC<ButtonProps> = ({
             color={color} 
             radius={radius}
             onClick={onClick}
+            disabled={disabled}
         >
             {children}
         </StyledButton>

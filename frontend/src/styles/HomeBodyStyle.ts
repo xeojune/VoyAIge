@@ -3,18 +3,17 @@ import styled from "styled-components";
 export const AppContainer = styled.div`
   font-family: 'Arial', sans-serif;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   background-color: #f8f9fa;
 `;
 
 export const MainContent = styled.main`
   display: flex;
   width: 100%;
-  height: 100%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  height: calc(100vh - 94px);
+  flex-grow: 1;
   overflow: hidden;
   background-color: white;
 `;
