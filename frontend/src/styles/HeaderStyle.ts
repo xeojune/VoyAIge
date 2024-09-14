@@ -13,6 +13,7 @@ export const NavbarContainer = styled.nav`
 export const Logo = styled.img`
   width: 100px;
   height: 50px;
+
 `;
 
 export const NavItems = styled.ul`

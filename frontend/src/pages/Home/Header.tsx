@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { NavbarContainer, Logo, NavItems, NavItem, NavLink } from "../../styles/HeaderStyle";
 import LogoImage from "../../assets/Logo.png"
 
+
 //New HomePage Before Rendering Map
 const Navbar: React.FC = () => {
     return (

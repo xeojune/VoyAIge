@@ -5,6 +5,7 @@ import Login from './pages/Auth/Login';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from './pages/Auth/Register';
 
+
 const App: React.FC = () => {
   return (
     <Router>
