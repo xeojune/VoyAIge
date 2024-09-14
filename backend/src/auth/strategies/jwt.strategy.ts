@@ -12,7 +12,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             //if json webtoken is expired no need checking again
             ignoreExpiration: false,
-            secretOrKey: '@VoyAIge5!74'
+            secretOrKey: process.env.JWT_SECRET
         })
     }
 
