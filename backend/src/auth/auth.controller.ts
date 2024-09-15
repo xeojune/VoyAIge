@@ -9,7 +9,7 @@ export class AuthController {
     //inject authservice to controller
     constructor(private authService: AuthService) {}
 
-    @Get('login')
+    @Post('login')
     // @UseGuards(AuthGuard('local'))
     //using guard that we have made (whenever we use the post request we go through the local guard)
 

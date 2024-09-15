@@ -5,13 +5,15 @@ import { Button } from "../../components/Button";
 import LogoImage from "../../assets/Logo.png"
 
 //test
-import userData from "../../api/LoginTest/auth.json";
+// import userData from "../../api/LoginTest/auth.json";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-interface User {
-    nickname: string;
-    email: string;
-    password: string;
-}
+// interface User {
+//     nickname: string;
+//     email: string;
+//     password: string;
+// }
 
 const Login: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -20,6 +22,8 @@ const Login: React.FC = () => {
     const [userValid, setUserValid] = useState(false);
     const [pwValid, setPwValid] = useState(false);
     const [notAllow, setNotAllow] = useState(true);
+
+    const navigate = useNavigate();
 
     const handleLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(e.target.value);
@@ -43,13 +47,23 @@ const Login: React.FC = () => {
         }
     }
 
-    const onClickConfirmButton = () => {
-        const user = userData.users.find((user: User) => user.email === username && user.password === password);
-        if(user){
-            alert('Successfully Login.');
-        } else {
-            alert('Not Registered User');
+    const onClickConfirmButton = async () => {
+        try {
+            const response = await axios.post('http://localhost:3000/auth/login', {
+                username: username,
+                password: password
+            });
+            localStorage.setItem('accessToken', response.data.token);
+    
+            console.log('Login successful:', response.data);
+            navigate('/');
+        } catch (error) {
+            console.error('Login error:', error);
+            alert("Unregistered User")
         }
+        
+        console.log(username, password);
+
     }
 
     useEffect(() => {

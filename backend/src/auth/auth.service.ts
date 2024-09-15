@@ -7,21 +7,7 @@ import { User } from './schemas/user.schema';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcryptjs'
 
-const fakeUsers = [
-    {
-        id: 1,
-        username: 'anson@gmail.com',
-        password: 'Password!234'
-    },
-    {
-        id: 2,
-        username: 'jack',
-        password: 'password123'
-    }
-    
-];
 @Injectable()
-
 export class AuthService {
     constructor(
         @InjectModel(User.name) private userModel: Model<User>,
@@ -36,6 +22,8 @@ export class AuthService {
         if (!findUser) {
             throw new UnauthorizedException('Unregistered User');
         }
+
+        
 
         // Compare the provided password with the hashed password in the MongoDB database
         // const isPasswordMatched = await bcrypt.compare(password, findUser.password);

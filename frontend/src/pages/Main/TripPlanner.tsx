@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Map from "./Map";
 import NavBar from "./NavBar";
 import List from "./List";
@@ -52,9 +52,17 @@ const TripPlanner: React.FC = () => {
             <PageContainer>
                 <LeftPanel>
                     <NavBar />
-                    <List restaurants={restaurants} attractions={attractions} country={country}/>
+                    <Suspense fallback={
+                        <div>Loading...</div>
+                    }>
+                        <List restaurants={restaurants} attractions={attractions} country={country}/>
+                    </Suspense>
                 </LeftPanel>
-                <Map coordinates={coordinates} />
+                <Suspense fallback={
+                    <div>Loa</div>
+                }>
+                    <Map coordinates={coordinates} />
+                </Suspense>
             </PageContainer>
         </RecoilRoot>
         
