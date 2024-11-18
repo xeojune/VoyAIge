@@ -7,6 +7,7 @@ import { FiltersModule } from './filters/filters.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { OpenAiModule } from './openai/openai.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     FiltersModule,
     AuthModule,
     UsersModule,
+    OpenAiModule,
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
