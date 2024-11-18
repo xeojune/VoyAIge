@@ -4,11 +4,14 @@ import NavBar from "./NavBar";
 import List from "./List";
 import { getPlacesData } from "../../api/Main";
 import { LocationData } from "../../types/LocationTypes";
-import { PlaceData } from "../../types/PlaceTypes";
+import { PlaceData, BackendPlaceData } from "../../types/PlaceTypes";
 import { useLocation } from "react-router-dom";
 import { LeftPanel, PageContainer } from "../../styles/TripPlannerStyle";
-import { RecoilRoot } from "recoil";
-
+import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil";
+import fetchOptimalRoute from "../../api/OptimalRouteAPI";
+import { placeListState } from "../../states/atoms/placeListState";
+import { routeState } from "../../states/atoms/routeState";
+import { travelDetailsState } from "../../states/atoms/travelDetailState";
 
 
 //capitalize first letter of any given country name typed by user
@@ -25,12 +28,23 @@ const TripPlanner: React.FC = () => {
     const [attractions, setAttractions] = useState<PlaceData[]>([]);
     const [coordinates, setCoordinates] = useState<LocationData>({ latitude: "0", longitude: "0" });
 
+    const places = useRecoilValue(placeListState);
+    const [, setRoute] = useRecoilState(routeState);
+    const [, setTravelDetails] = useRecoilState(travelDetailsState);
+
     if (country) {
         country = capitalizeFirstLetter(country);
     }
 
-    const [places, setPlaces] = useState([]);
-    //happen only at the start of app
+    const convertToBackendPlaces = (places: PlaceData[]): BackendPlaceData[] => {
+        return places.map((place) => ({
+            name: place.name,
+            latitude: Number(place.latitude), // Convert latitude to number
+            longitude: Number(place.longitude), // Convert longitude to number
+        }));
+    };
+
+    // happen only at the start of app
     useEffect(() => {
         if (country) {
             getPlacesData(country)
@@ -46,6 +60,24 @@ const TripPlanner: React.FC = () => {
                 });
         }
     }, []);
+
+    
+
+    // Fetch optimal route when places change
+    useEffect(() => {
+        if (places.length > 0) {
+            const backendPlaces = convertToBackendPlaces(places); // Convert to BackendPlaceData[]
+            fetchOptimalRoute(backendPlaces)
+                .then((response) => {
+                    setRoute(response.route); // Set the global Recoil route state
+                    setTravelDetails(response.travelDetails); // Set the global Recoil travel details state
+                })
+                .catch((error) => {
+                    console.error("Error fetching optimal route:", error);
+                });
+        }
+    }, [places, setRoute, setTravelDetails]);
+    
     
     return(
         <RecoilRoot>
@@ -55,13 +87,15 @@ const TripPlanner: React.FC = () => {
                     <Suspense fallback={
                         <div>Loading...</div>
                     }>
-                        <List restaurants={restaurants} attractions={attractions} country={country}/>
+                        <List restaurants={restaurants} attractions={attractions} country={country} />
                     </Suspense>
                 </LeftPanel>
                 <Suspense fallback={
-                    <div>Loa</div>
+                    <div>Loadig...</div>
                 }>
-                    <Map coordinates={coordinates} />
+                    <Map 
+                        coordinates={coordinates} 
+                    />
                 </Suspense>
             </PageContainer>
         </RecoilRoot>

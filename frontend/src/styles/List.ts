@@ -58,7 +58,7 @@ export const PlacesContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: calc(100vh - 290px);
+  height: calc(100vh - 280px);
   overflow-y: auto;
   margin-bottom: 0;
 

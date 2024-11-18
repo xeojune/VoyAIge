@@ -18,9 +18,16 @@ export type PlaceData = {
             }
         };
     };
-    latitude: string;
-    longitude: string;
+    latitude: string | number;
+    longitude: string | number;
     num_reviews: string;
     rating: string;
     description: string;
 }
+
+export type BackendPlaceData = {
+    name: string;
+    latitude: number;
+    longitude: number;
+};
+

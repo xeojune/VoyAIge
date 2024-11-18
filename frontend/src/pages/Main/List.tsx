@@ -3,10 +3,12 @@ import { CardButton, ButtonsContainer, CardContainer, ListBody, ListContainer, L
 import SearchBar from "../../components/SearchBar";
 import {Button, ToggledButton} from "../../components/Button";
 import Card from "../../components/PlaceCards";
-import { PlaceData } from "../../types/PlaceTypes";
+import { PlaceData, BackendPlaceData } from "../../types/PlaceTypes";
 import { useRecoilState } from "recoil";
 import { placeListState } from "../../states/atoms/placeListState";
+import { routeState } from "../../states/atoms/routeState";
 import ModalCard from "../../components/ModalCards";
+import fetchOptimalRoute from "../../api/OptimalRouteAPI";
 
 interface ListProps {
     restaurants: PlaceData[];
@@ -24,7 +26,11 @@ const List: React.FC<ListProps> = ({ restaurants, attractions, country }) =>{
     //state for storing place data for modal card
     const [selectedPlace, setSelectedPlace] = useState<PlaceData | null>(null);
     //recoil state for places
-    const [_, setPlaces] = useRecoilState(placeListState);
+    const [places, setPlaces] = useRecoilState(placeListState);
+    //recoil state for route (to be used in Map)
+    const [route, setRoute] = useRecoilState(routeState); 
+    // Loading state for API call
+    const [loading, setLoading] = useState(false); 
     
     
     //handling search filter
@@ -35,15 +41,44 @@ const List: React.FC<ListProps> = ({ restaurants, attractions, country }) =>{
     //function to add and remove places selected
     const handleAddPlaces = (place: PlaceData) => {
         setPlaces((prevPlaces) => {
-            const placeIndex = prevPlaces.findIndex(p => p.latitude === place.latitude && p.longitude === place.longitude);
+            
+            const placeIndex = prevPlaces.findIndex((p) => p.latitude === Number(place.latitude) && p.longitude === Number(place.longitude));
+            
             if (placeIndex !== -1) {
                 //Remove Place
                 return prevPlaces.filter(( _, index) => index !== placeIndex);
             } else {
-                //Add Place
-                return [...prevPlaces, place];
+                
+                return [
+                    ...prevPlaces,
+                    { ...place, latitude: Number(place.latitude), longitude: Number(place.longitude) },
+                ];
             }
+       
         });
+    };
+
+    const prepareBackendPlaces = (places: PlaceData[]): BackendPlaceData[] => {
+        return places.map((place) => ({
+            name: place.name,
+            latitude: Number(place.latitude), // Convert to number
+            longitude: Number(place.longitude), // Convert to number
+        }));
+    };
+
+    const handleGetRoute = async () => {
+        setLoading(true);
+        try {
+            const backendPlaces = prepareBackendPlaces(places); // Prepare data for backend
+            console.log("Backend Places:", backendPlaces);
+            const response = await fetchOptimalRoute(backendPlaces); // Call the API
+            setRoute(response.route); // Store the route in state
+            console.log("Optimal Route:", response.route);
+        } catch (error) {
+            console.error("Failed to fetch optimal route:", error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     //open selected card
@@ -102,9 +137,25 @@ const List: React.FC<ListProps> = ({ restaurants, attractions, country }) =>{
                         {openCard && selectedPlace && (
                             <ModalCard place={selectedPlace} width="600px" height="650px" background="white" color="black" radius="10px" onClose={handleCloseCard}/>
                         )}
-
                     </CardContainer>
                 </PlacesContainer>
+
+                <Button
+                    radius="5px"
+                    width="300px"
+                    height='50px'
+                    background="#85e1fc"
+                    color="black"
+                    onClick={handleGetRoute}
+                >
+                    {loading ? "Calculating Route..." : "Get Optimal Route"}
+                </Button>
+                {/* {route && (
+                    <div>
+                        <h2>Optimal Route</h2>
+                        <pre>{JSON.stringify(route, null, 2)}</pre>
+                    </div>
+                )} */}
             </ListBody>
         </ListContainer>
     );
